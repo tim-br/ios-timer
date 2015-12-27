@@ -16,19 +16,19 @@ var StopWatch = React.createClass({
   },
   render: function(){
     return <View style={styles.container}>
-      <View style={[styles.header, this.border('yellow')]}>
-        <View style={[styles.timerWrapper, this.border('red')]}>
+      <View style={styles.header}>
+        <View style={styles.timerWrapper}>
           <Text style={styles.timer}>
             {formatTime(this.state.timeElapsed)}
           </Text>
         </View>
-        <View style={[styles.buttonWrapper, this.border('green')]}>
+        <View style={styles.buttonWrapper}>
           {this.startStopButton()}
           {this.lapButton()}
         </View>
       </View>
 
-      <View style={[styles.footer, this.border('blue')]}>
+      <View style={styles.footer}>
         <Text>
           I am a list of laps
         </Text>
@@ -65,12 +65,6 @@ var StopWatch = React.createClass({
         timeElapsed: new Date() - startTime
       });
     }, 30);
-  },
-  border: function(color){
-    return {
-      borderColor: color,
-      borderWidth: 4
-    }
   }
 });
 
