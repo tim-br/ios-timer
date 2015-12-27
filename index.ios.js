@@ -13,7 +13,8 @@ var StopWatch = React.createClass({
     return {
       timeElapsed: null,
       running: false,
-      startTime: null
+      startTime: null,
+      laps: []
     }
   },
   render: function(){
@@ -31,11 +32,21 @@ var StopWatch = React.createClass({
       </View>
 
       <View style={styles.footer}>
-        <Text>
-          I am a list of laps
-        </Text>
+        {this.laps()}
       </View>
     </View>
+  },
+  laps: function(){
+    return this.state.laps.map(function(time, index){
+      return <View>
+        <Text>
+          Lap #{index + 1}
+        </Text>
+        <Text>
+          {formatTime(time)}
+        </Text>
+      </View>
+    });
   },
   startStopButton: function(){
     var style = this.state.running ? styles.stopButton : styles.startButton;
@@ -62,6 +73,8 @@ var StopWatch = React.createClass({
   handleLapPress: function(){
     var lapTime = this.state.timeElapsed;
     this.setState({
+      // don't use push
+      laps: this.state.laps.concat([lapTime]),
       startTime: new Date()
     });
   },
